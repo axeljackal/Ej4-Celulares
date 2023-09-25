@@ -1,0 +1,44 @@
+@startuml
+class Persona {
+  -Celular celular
+  -CompañiaTelefonica compañia
+  -totalCostoLlamadas: float
+  +llamar(Persona p, int duracion)
+  +recargarCelular()
+  +estaCelularApagado(): bool
+}
+
+class Celular {
+  -float bateria
+  -string modelo
+  +realizarLlamada(int duracion): void
+  +recargar(): void
+  +estaApagado(): bool
+}
+
+class SamsungS21 extends Celular {
+  +realizarLlamada(int duracion): void
+}
+
+class iPhone extends Celular {
+  +realizarLlamada(int duracion): void
+}
+
+class CompañiaTelefonica {
+  -float costoLlamada
+  +calcularCosto(int duracion): float
+}
+
+class Movistar extends CompañiaTelefonica {}
+class Claro extends CompañiaTelefonica {}
+class Personal extends CompañiaTelefonica {}
+
+Persona "1" -- "1" CompañiaTelefonica
+Persona "1" -- "1" Celular
+Persona "*" --> "*" Persona : llama
+Celular <|-- SamsungS21
+Celular <|-- iPhone
+CompañiaTelefonica <|-- Movistar
+CompañiaTelefonica <|-- Claro
+CompañiaTelefonica <|-- Personal
+@enduml
